@@ -6,7 +6,20 @@
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
     "emit": "tsc",
-    "pretest": "tsc && npm run lint && npm run build"
+    "pretest": "tsc && npm run lint && npm run build",
+    "test": "npm run test:unit && npm run test:conditional",
+    "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
+    "test:dev": "karma start",
+    "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
+    "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
+    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
+    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
+    "lint:fix": "npm run lint -- --fix",
+    "deploy": " npm run updateProject && npm run deployApp",
+    "build": "grunt release",
+    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
+    "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
+    "deployAndTest": "npm run deploy && npm run test:e2e"
   },
   "pre-commit": [
     "pretest",
@@ -81,8 +94,21 @@
     "ts-loader": "^2.2.2",
     "tslint": "^5.6.0",
     "tslint-eslint-rules": "^4.1.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "wdio-dot-reporter": "0.0.9",
+    "wdio-jasmine-framework": "^0.3.2",
+    "wdio-selenium-standalone-service": "0.0.9",
+    "wdio-spec-reporter": "^0.1.2",
+    "webdriverio": "^4.8.0",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "date-fns": "1.29.0",
+    "classnames": "^2.2.5",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-icons": "^2.2.7",
+    "react-infinite-calendar": "^2.3.1"
   }
 }

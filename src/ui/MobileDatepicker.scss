@@ -7,10 +7,12 @@
 
 .widget-date-picker-form-row {
   margin-left: 20px;
-  max-width: 65px;
-  max-height: 65px; 
+  max-width: 35px;
+  max-height: 35px; 
   position: relative; 
-  margin-top: 9px;
+  height: 25px;
+  width: 25px;
+  margin-top: 0px;
 }
 
 .Cal__Day__root.Cal__Day__selected .Cal__Day__selection, .Calendar {
@@ -35,6 +37,7 @@
   width: 30px;
   margin-top: 0px;
  }
+ 
  .Calendar{
    margin-left: 1px;
  }

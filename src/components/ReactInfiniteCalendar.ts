@@ -15,17 +15,16 @@ export interface InfiniteCalendarProps {
     autoFocus: boolean;
     tabIndex: number;
     showMonthsForYears: boolean;
-    printDate?: string;
+    printDate: string;
     onSelect: (date: string) => void;
     showCalendar: boolean;
 }
-
-export class ReactInfiniteCalendar extends Component<InfiniteCalendarProps , {}> {
+export class ReactInfiniteCalendar extends Component<InfiniteCalendarProps, {}> {
     render() {
         return createElement("div", {}, this.createCalendar());
     }
     private createCalendar() {
-        if (this.props.showCalendar) {
+        if (!this.props.showCalendar) {
             return createElement(InfiniteCalendar, {
                 actionClick: this.props.actionClick,
                 autoFocus: this.props.autoFocus,

@@ -38,9 +38,10 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
 
         this.state = {
             isPlainText: true,
-            printDate: ""
+            printDate: `${format(props.attribute, this.props.formatDate)}`
         };
 
+        this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -55,6 +56,7 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
     private createDateInput() {
         return createElement(DateInput, {
             attribute: this.props.attribute,
+            onChange: this.handleChange,
             onClick: this.handleClick,
             printDate: this.state.printDate
         });
@@ -84,9 +86,21 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
         });
     }
 
+    componentWillReceiveProps(newProps: MobileDatepickerProps) {
+        this.setState({
+            printDate: `${format(newProps.attribute, this.props.formatDate)}`
+        });
+    }
+
     private handleClick() {
         this.setState({
             isPlainText: !this.state.isPlainText
+        });
+    }
+
+    private handleChange(attribute: string) {
+        this.setState({
+            printDate: attribute
         });
     }
 }
