@@ -26,8 +26,8 @@ describe("MobileDatepicker", () => {
     };
 
     const defaultState: DatePickerState = {
-        isPlainText: true,
-        printDate: "Invalid Date"
+        printDate: "Invalid Date",
+        showCalendar: true
     };
 
     it("should render the structure correctly", () => {

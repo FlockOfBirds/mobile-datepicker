@@ -5,7 +5,8 @@ interface WrapperProps {
     class: string;
     mxObject: mendix.lib.MxObject;
     readOnly: boolean;
-    style: string;
+    style?: string;
+    friendlyId: string;
 }
 
 export interface ContainerProps extends WrapperProps {
@@ -71,6 +72,7 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             showHeader: this.props.showHeader,
             showMonthsForYears: this.props.showMonthsForYears,
             showOverlay: this.props.showOverlay,
+            style: DatePickerContainer.parseStyle(this.props.style),
             tabIndex: this.props.tabIndex,
             todayHelperRowOffset: this.props.todayHelperRowOffset,
             updateDate: this.updateDate,
@@ -92,6 +94,24 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
 
     private getValue(attribute: string, mxObject?: mendix.lib.MxObject): string {
         return mxObject ? (mxObject.get(attribute) as string) : "";
+    }
+
+    public static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {

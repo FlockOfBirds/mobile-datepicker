@@ -2,7 +2,7 @@
   "name": "mobile-datepicker",
   "widgetName": "MobileDatepicker",
   "version": "0.0.1",
-  "description": "This widget lets users select a date to input into the text box using the popup calendar .",
+  "description": "Select a date to input into the text box using calendar .",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
     "emit": "tsc",

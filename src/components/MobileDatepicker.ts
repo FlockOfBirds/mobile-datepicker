@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import "../ui/MobileDatepicker.scss";
 
 import { ReactInfiniteCalendar } from "./ReactInfiniteCalendar";
@@ -27,7 +27,7 @@ export interface MobileDatepickerProps {
 }
 
 export interface DatePickerState {
-    isPlainText: boolean;
+    showCalendar: boolean;
     printDate: string;
 }
 
@@ -37,8 +37,8 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
         super(props);
 
         this.state = {
-            isPlainText: true,
-            printDate: `${format(props.attribute, this.props.formatDate)}`
+            printDate: `${format(props.attribute, this.props.formatDate)}`,
+            showCalendar: this.props.autoFocus
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -46,14 +46,14 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
     }
 
     render() {
-        return createElement("div", {},
+        return createElement("div", { style: this.props.style },
             this.createDateInput(),
             createElement("br", {}),
             this.createCalender()
         );
     }
 
-    private createDateInput() {
+    private createDateInput(): ReactNode {
         return createElement(DateInput, {
             attribute: this.props.attribute,
             onChange: this.handleChange,
@@ -61,7 +61,7 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
             printDate: this.state.printDate
         });
     }
-    private createCalender() {
+    private createCalender(): ReactNode {
         return createElement(ReactInfiniteCalendar, {
             actionClick: this.props.actionClick,
             autoFocus: this.props.autoFocus,
@@ -70,13 +70,16 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
             hideYearsOnSelect: this.props.hideYearsOnSelect,
             onSelect: (date: string) => {
                 this.setState({
-                    isPlainText: !this.state.isPlainText,
-                    printDate: `${format(date, this.props.formatDate)}`
+                    printDate: `${format(date, this.props.formatDate)}`,
+                    showCalendar: !this.state.showCalendar
                 });
+                if (this.props.actionClick) {
+                    alert("You selected: " + format(date, "ddd, MMM Do YYYY"));
+                }
             },
             printDate: this.state.printDate,
             rowHeight: this.props.rowHeight,
-            showCalendar: this.state.isPlainText,
+            showCalendar: this.state.showCalendar,
             showHeader: this.props.showHeader,
             showMonthsForYears: this.props.showMonthsForYears,
             showOverlay: this.props.showOverlay,
@@ -94,7 +97,7 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
 
     private handleClick() {
         this.setState({
-            isPlainText: !this.state.isPlainText
+            showCalendar: !this.state.showCalendar
         });
     }
 

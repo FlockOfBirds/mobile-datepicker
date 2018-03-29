@@ -9,27 +9,27 @@
         <property key="dateEntity" type="entity">
             <caption>Calendar entity</caption>
             <category>Data Source</category>
-            <description>The entity which the calendar will receive </description>
+            <description>Entity for the calendar</description>
         </property>
-        <property key="attribute" type="attribute" required="true" >
+        <property key="attribute" type="attribute">
             <caption>Calendar attribute</caption>
             <category>Data Source</category>
-            <description>The attribute that holds the date</description>
+            <description>Attribute which stores the date</description>
             <attributeTypes>
                 <attributeType name="DateTime" />
             </attributeTypes>
         </property>
-        <property key="showHeader" type="boolean" required="true" defaultValue="true">
+        <property key="showHeader" type="boolean" defaultValue="true">
             <caption>Show header</caption>
             <category>Appearance</category>
             <description>Show/hide the header</description>
         </property>
-        <property key="showOverlay" type="boolean" required="true" defaultValue="true">
+        <property key="showOverlay" type="boolean" defaultValue="true">
             <caption>Show overlay</caption>
             <category>Appearance</category>
-            <description>Show/hide the month overlay when scrolling</description>
+            <description>Display the month overlay when scrolling</description>
         </property>
-        <property key="showMonthsForYears" type="boolean" required="true" defaultValue="false">
+        <property key="showMonthsForYears" type="boolean" defaultValue="false">
             <caption>Show month for years</caption>
             <category>Appearance</category>
             <description>Show a list of years </description>
@@ -37,43 +37,43 @@
         <property key="actionClick" type="boolean" required="true" defaultValue="false">
             <caption>Show alert after click</caption>
             <category>Appearance</category>
-            <description>Show an alert with selected date </description>
+            <description>Show an alert when a date is selected</description>
         </property>
-        <property key="hideYearsOnSelect" type="boolean" required="true" defaultValue="true">
+        <property key="hideYearsOnSelect" type="boolean" defaultValue="true">
             <caption>Hide years on select</caption>
             <category>Appearance</category>
-            <description>Whether to automatically hide the years view on select.</description>
+            <description>Display year view on select</description>
         </property>
         <property key="width" type="integer" defaultValue="300">
             <caption>Calender width</caption>
             <category>General</category>
-            <description>Width of the calendar in pixels</description>
+            <description>Width applied to the calendar in pixels</description>
         </property>
          <property key="height" type="integer" defaultValue="320">
             <caption>Calender height</caption>
             <category>General</category>
-            <description>Height of the calendar in pixels</description>
+            <description>Height applied to the calendar in pixels</description>
         </property>
 
-          <property key="overscanMonthCount" type="integer" required="true" defaultValue="4">
+          <property key="overscanMonthCount" type="integer" defaultValue="4">
             <caption>Over scan month count</caption>
             <category>Appearance</category>
-            <description>Number of months to render above/below the visible months. Tweaking this can help reduce flickering during scrolling on certain browers/devices..</description>
+            <description>Number of months dispalyed above/below the visible months. Tweaking this can help reduce flickering during scrolling on certain browers/devices..</description>
         </property>
-        <property key="todayHelperRowOffset" type="integer" required="true" defaultValue="4">
+        <property key="todayHelperRowOffset" type="integer" defaultValue="4">
             <caption>Today helper row Offset</caption>
             <category>Appearance</category>
-            <description>This controls the number of rows to scroll past before the Today helper appears.</description>
+            <description>Number of rows to scroll before the "Today" helper appears</description>
         </property>
            <property key="rowHeight" type="integer" defaultValue="56">
             <caption>Row height</caption>
             <category>General</category>
-            <description>Height of each row in the calendar (each week is considered a row)</description>
+            <description>Height of each row in the calendar. Each week is considered a row</description>
         </property>
          <property key="autoFocus" type="boolean" defaultValue="true">
             <caption>Auto focus</caption>
             <category>General</category>
-            <description>Whether the Calendar root should be auto-focused when it mounts</description>
+            <description>Display calendar on load page</description>
         </property>
         <property key="tabIndex" type="integer" defaultValue="1">
             <caption>Tab index</caption>
@@ -81,9 +81,9 @@
             <description>Tab index of the calendar</description>
         </property>
         <property key="formatDate" type="string" defaultValue="MM/DD/YYYY">
-            <caption>format date</caption>
+            <caption>Date format</caption>
             <category>General</category>
-            <description>choose format of your choice. eg MM/DD/YYYY, MMM/DD/YYYY, MM-DD-YYYY, MMM-DD-YYYY </description>
+            <description>choose date format eg MM/DD/YYYY, MMM/DD/YYYY, MM-DD-YYYY, MMM-DD-YYYY </description>
         </property>
     </properties>
 </widget>
