@@ -24,6 +24,8 @@ export interface MobileDatepickerProps {
     attribute: string;
     selected?: Date;
     formatDate: string;
+    onselectMicroflow: string;
+    update: (date: string) => void;
 }
 
 export interface DatePickerState {
@@ -65,7 +67,7 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
         return createElement(ReactInfiniteCalendar, {
             actionClick: this.props.actionClick,
             autoFocus: this.props.autoFocus,
-            className: "Calendar",
+            className: "widget-date-picker-calendar",
             height: this.props.height,
             hideYearsOnSelect: this.props.hideYearsOnSelect,
             onSelect: (date: string) => {
@@ -74,7 +76,8 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
                     showCalendar: !this.state.showCalendar
                 });
                 if (this.props.actionClick) {
-                    alert("You selected: " + format(date, "ddd, MMM Do YYYY"));
+                    // alert("You selected: " + format(date, "ddd, MMM Do YYYY"));
+                    this.props.update(this.props.onselectMicroflow);
                 }
             },
             printDate: this.state.printDate,

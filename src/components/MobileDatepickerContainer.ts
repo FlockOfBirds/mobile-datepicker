@@ -10,7 +10,7 @@ interface WrapperProps {
 }
 
 export interface ContainerProps extends WrapperProps {
-    onChangeMicroflow: string;
+    onSelect: string;
     editable: boolean;
     attribute: string;
     showHeader: boolean;
@@ -67,6 +67,7 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             formatDate: this.props.formatDate,
             height: this.props.height,
             hideYearsOnSelect: this.props.hideYearsOnSelect,
+            onselectMicroflow: this.props.onSelect,
             readOnly,
             rowHeight: this.props.rowHeight,
             showHeader: this.props.showHeader,
@@ -75,7 +76,7 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             style: DatePickerContainer.parseStyle(this.props.style),
             tabIndex: this.props.tabIndex,
             todayHelperRowOffset: this.props.todayHelperRowOffset,
-            updateDate: this.updateDate,
+            update: this.executeMicroflow2,
             width: this.props.width
         });
     }
@@ -135,15 +136,16 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
         this.props.mxObject.set(this.props.attribute, newDate);
 
         if (this.props.actionClick) {
-            const { onChangeMicroflow, mxObject } = this.props;
+            const { onSelect, mxObject } = this.props;
             mx.data.get({
                 callback: (object) => {
-                    this.saveDate(mxObject, onChangeMicroflow, object[0].getGuid());
+                    this.saveDate(mxObject, onSelect, object[0].getGuid());
                 },
                 error: error => `${error.message}`,
                 xpath: `//${this.dateEntity}[ ${this.attribute} = '${newDate}' ]`
             });
         }
+        // alert(newDate);
     }
 
     private saveDate(object: mendix.lib.MxObject, action?: string, guid?: string) {
@@ -165,6 +167,19 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
                 params: {
                     applyto: "selection",
                     guids: [ guid ]
+                }
+            });
+        }
+    }
+
+    private executeMicroflow2 = (actionName: string) => {
+        if (actionName) {
+            window.mx.ui.action(actionName, {
+                error: error =>
+                    window.mx.ui.error(`An error occurred while executing microflow: ${actionName}: ${error.message}`),
+                params: {
+                    applyto: "selection",
+                    guids: [ this.props.mxObject.getGuid() ]
                 }
             });
         }

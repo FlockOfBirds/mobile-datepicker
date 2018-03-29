@@ -19,6 +19,36 @@
                 <attributeType name="DateTime" />
             </attributeTypes>
         </property>
+        <property key="width" type="integer" defaultValue="300">
+            <caption>Calender width</caption>
+            <category>General</category>
+            <description>Width applied to the calendar in pixels</description>
+        </property>
+        <property key="height" type="integer" defaultValue="320">
+            <caption>Calender height</caption>
+            <category>General</category>
+            <description>Height applied to the calendar in pixels</description>
+        </property>
+        <property key="autoFocus" type="boolean" defaultValue="true">
+            <caption>Auto focus</caption>
+            <category>General</category>
+            <description>Display calendar on load page</description>
+        </property>
+        <property key="tabIndex" type="integer" defaultValue="1">
+            <caption>Tab index</caption>
+            <category>General</category>
+            <description>Tab index of the calendar</description>
+        </property>
+        <property key="formatDate" type="string" defaultValue="MM/DD/YYYY">
+            <caption>Date format</caption>
+            <category>General</category>
+            <description>Choose date format eg MM/DD/YYYY, MMM/DD/YYYY, MM-DD-YYYY, MMM-DD-YYYY </description>
+        </property>
+        <property key="rowHeight" type="integer" defaultValue="56">
+            <caption>Row height</caption>
+            <category>General</category>
+            <description>Height of each row in the calendar. Each week is considered a row</description>
+        </property>
         <property key="showHeader" type="boolean" defaultValue="true">
             <caption>Show header</caption>
             <category>Appearance</category>
@@ -44,18 +74,7 @@
             <category>Appearance</category>
             <description>Display year view on select</description>
         </property>
-        <property key="width" type="integer" defaultValue="300">
-            <caption>Calender width</caption>
-            <category>General</category>
-            <description>Width applied to the calendar in pixels</description>
-        </property>
-         <property key="height" type="integer" defaultValue="320">
-            <caption>Calender height</caption>
-            <category>General</category>
-            <description>Height applied to the calendar in pixels</description>
-        </property>
-
-          <property key="overscanMonthCount" type="integer" defaultValue="4">
+        <property key="overscanMonthCount" type="integer" defaultValue="4">
             <caption>Over scan month count</caption>
             <category>Appearance</category>
             <description>Number of months dispalyed above/below the visible months. Tweaking this can help reduce flickering during scrolling on certain browers/devices..</description>
@@ -65,25 +84,23 @@
             <category>Appearance</category>
             <description>Number of rows to scroll before the "Today" helper appears</description>
         </property>
-           <property key="rowHeight" type="integer" defaultValue="56">
-            <caption>Row height</caption>
-            <category>General</category>
-            <description>Height of each row in the calendar. Each week is considered a row</description>
+        <property key="onSelect" type="microflow" required="false">
+            <caption>On change</caption>
+            <category>Events</category>
+            <description>Microflow triggered when date is changed</description>
+            <returnType type="Void"/>
         </property>
-         <property key="autoFocus" type="boolean" defaultValue="true">
-            <caption>Auto focus</caption>
-            <category>General</category>
-            <description>Display calendar on load page</description>
+        <property key="onLeave" type="microflow" required="false">
+            <caption>On leave</caption>
+            <category>Events</category>
+            <description>Microflow triggered when mouse leaves input field</description>
+            <returnType type="Void"/>
         </property>
-        <property key="tabIndex" type="integer" defaultValue="1">
-            <caption>Tab index</caption>
-            <category>General</category>
-            <description>Tab index of the calendar</description>
-        </property>
-        <property key="formatDate" type="string" defaultValue="MM/DD/YYYY">
-            <caption>Date format</caption>
-            <category>General</category>
-            <description>choose date format eg MM/DD/YYYY, MMM/DD/YYYY, MM-DD-YYYY, MMM-DD-YYYY </description>
+        <property key="onEnter" type="microflow" required="false">
+            <caption>On Enter</caption>
+            <category>Events</category>
+            <description>Microflow triggered when mouse enters input field</description>
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>
