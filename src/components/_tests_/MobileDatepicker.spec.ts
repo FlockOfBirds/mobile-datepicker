@@ -15,6 +15,8 @@ describe("MobileDatepicker", () => {
         formatDate: "DD/MM/YYYY",
         height: 300,
         hideYearsOnSelect: true,
+        onEnterMicroflow: "",
+        onLeaveMicroflow: "",
         onselectMicroflow: "string",
         rowHeight: 56,
         selected: new Date(),
@@ -41,6 +43,8 @@ describe("MobileDatepicker", () => {
                     attribute: defaultProps.attribute,
                     onChange: jasmine.any(Function),
                     onClick: jasmine.any(Function),
+                    onEnter: jasmine.any(Function),
+                    onLeave: jasmine.any(Function),
                     printDate: defaultState.printDate
                 }),
                 createElement("br", {}),

@@ -27,6 +27,8 @@ export interface ContainerProps extends WrapperProps {
     formatDate: string;
     selected: Date;
     dateEntity: string;
+    onLeave: string;
+    onEnter: string;
 }
 
 interface ContainerState {
@@ -34,8 +36,6 @@ interface ContainerState {
 }
 
 export default class DatePickerContainer extends Component<ContainerProps, ContainerState> {
-    private attribute: string;
-    private dateEntity: string;
     private subscriptionHandles: number[];
 
     constructor(props: ContainerProps) {
@@ -45,11 +45,8 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             dateValue: this.getValue(props.attribute, props.mxObject) as string
         };
 
-        this.attribute = "";
-        this.dateEntity = "";
         this.subscriptionHandles = [];
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
-        this.updateDate = this.updateDate.bind(this);
         this.resetSubscriptions = this.resetSubscriptions.bind(this);
     }
 
@@ -67,6 +64,8 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             formatDate: this.props.formatDate,
             height: this.props.height,
             hideYearsOnSelect: this.props.hideYearsOnSelect,
+            onEnterMicroflow: this.props.onEnter,
+            onLeaveMicroflow: this.props.onLeave,
             onselectMicroflow: this.props.onSelect,
             readOnly,
             rowHeight: this.props.rowHeight,
@@ -76,7 +75,7 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
             style: DatePickerContainer.parseStyle(this.props.style),
             tabIndex: this.props.tabIndex,
             todayHelperRowOffset: this.props.todayHelperRowOffset,
-            update: this.executeMicroflow2,
+            update: this.executeMicroflow,
             width: this.props.width
         });
     }
@@ -132,47 +131,7 @@ export default class DatePickerContainer extends Component<ContainerProps, Conta
         });
     }
 
-    private updateDate(newDate: string) {
-        this.props.mxObject.set(this.props.attribute, newDate);
-
-        if (this.props.actionClick) {
-            const { onSelect, mxObject } = this.props;
-            mx.data.get({
-                callback: (object) => {
-                    this.saveDate(mxObject, onSelect, object[0].getGuid());
-                },
-                error: error => `${error.message}`,
-                xpath: `//${this.dateEntity}[ ${this.attribute} = '${newDate}' ]`
-            });
-        }
-        // alert(newDate);
-    }
-
-    private saveDate(object: mendix.lib.MxObject, action?: string, guid?: string) {
-        mx.data.commit({
-            callback: () => {
-                if (action && guid) {
-                    this.executeMicroflow(action, guid);
-                }
-            },
-            mxobj: object
-        });
-    }
-
-    private executeMicroflow(microflow: string, guid: string) {
-        if (microflow) {
-            window.mx.ui.action(microflow, {
-                error: error =>
-                    window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`),
-                params: {
-                    applyto: "selection",
-                    guids: [ guid ]
-                }
-            });
-        }
-    }
-
-    private executeMicroflow2 = (actionName: string) => {
+    private executeMicroflow = (actionName: string) => {
         if (actionName) {
             window.mx.ui.action(actionName, {
                 error: error =>

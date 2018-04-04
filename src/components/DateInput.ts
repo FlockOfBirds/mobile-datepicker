@@ -5,6 +5,8 @@ export interface DateInputProps {
     attribute: string;
     onChange: (attribute: string) => void;
     onClick: () => void;
+    onEnter: () => void;
+    onLeave: () => void;
     printDate: string;
 }
 
@@ -16,6 +18,8 @@ export class DateInput extends Component<DateInputProps , {}> {
                 className: "widget-date-picker-form",
                 onChange: this.props.onChange,
                 onClick: this.props.onClick,
+                onMouseEnter: this.props.onEnter,
+                onMouseLeave: this.props.onLeave,
                 placeholder: this.props.printDate,
                 type: "text"
             }),

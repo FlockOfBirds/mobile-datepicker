@@ -20,6 +20,8 @@ export class preview extends Component<ContainerProps, DatePickerState> {
             formatDate: "DD/MM/YYYY",
             height: 300,
             hideYearsOnSelect: true,
+            onEnterMicroflow: "onMouseEnterMicroflow",
+            onLeaveMicroflow: "onMouseLeaveMicroflow",
             onselectMicroflow: "String",
             rowHeight: 56,
             selected: new Date(),

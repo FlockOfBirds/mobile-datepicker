@@ -10,6 +10,8 @@ describe("DateInput", () => {
         attribute: "date",
         onChange: jasmine.createSpy("onChange"),
         onClick: jasmine.createSpy("onClick"),
+        onEnter: jasmine.createSpy("onMouseEnter"),
+        onLeave: jasmine.createSpy("onMouseLeave"),
         printDate: "12/05/1994"
     };
 

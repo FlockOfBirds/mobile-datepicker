@@ -25,6 +25,8 @@ export interface MobileDatepickerProps {
     selected?: Date;
     formatDate: string;
     onselectMicroflow: string;
+    onLeaveMicroflow: string;
+    onEnterMicroflow: string;
     update: (date: string) => void;
 }
 
@@ -60,6 +62,8 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
             attribute: this.props.attribute,
             onChange: this.handleChange,
             onClick: this.handleClick,
+            onEnter: this.onMouseEnter,
+            onLeave: this.onMouseLeave,
             printDate: this.state.printDate
         });
     }
@@ -76,7 +80,6 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
                     showCalendar: !this.state.showCalendar
                 });
                 if (this.props.actionClick) {
-                    // alert("You selected: " + format(date, "ddd, MMM Do YYYY"));
                     this.props.update(this.props.onselectMicroflow);
                 }
             },
@@ -108,5 +111,13 @@ export class MobileDatepicker extends Component<MobileDatepickerProps, DatePicke
         this.setState({
             printDate: attribute
         });
+    }
+
+    private onMouseEnter = () => {
+        this.props.update(this.props.onEnterMicroflow);
+    }
+
+    private onMouseLeave = () => {
+        this.props.update(this.props.onLeaveMicroflow);
     }
 }
